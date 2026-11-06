@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Indian Stock Market Analysis</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Indian Stock Market Analysis</h1>
+
+        <p class="subtitle">
+            Historical Stock Price Analysis Using Time Series
+        </p>
+
+        <div class="search-box">
+
+            <label>Select Company</label>
+
+            <select id="stockSelect">
+                {% for name, ticker in stocks.items() %}
+                    <option value="{{ name }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+
+            <button onclick="loadStockData()">
+                Analyze Stock
+            </button>
+
+        </div>
+
+        <p id="loading"></p>
+
+        <div id="resultSection" style="display:none;">
+
+            <h2 id="stockTitle"></h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Highest Price</h3>
+                    <p id="highestPrice">--</p>
+                </div>
+
+                <div class="card">
+                    <h3>Lowest Price</h3>
+                    <p id="lowestPrice">--</p>
+                </div>
+
+            </div>
+
+            <div class="chart-container">
+                <canvas id="stockChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
